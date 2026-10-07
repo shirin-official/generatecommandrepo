@@ -1,0 +1,84 @@
+name: FireFlink CI/CD Execution
+
+on:
+  workflow_dispatch:
+
+jobs:
+  execute-fireflink:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Trigger FireFlink execution
+        shell: bash
+        run: |
+          curl --location 'https://performance.fireflink.com/dashboardexecution/optimize/v3/public/cicd/default-machine' \
+            --header "Content-Type: application/json" \
+            --header "version: phase_1" \
+            --data-raw '{
+              "suiteId": "SUITE_726a923f-a373-4ebb-be14-1ac874cd1177",
+              "waitConfig": {
+                "captureScreenshots": "allSteps",
+                "captureVideos": "allScripts",
+                "delayBetweenSteps": "0",
+                "delayBetweenStepsUnit": "Seconds",
+                "explicitWait": "20",
+                "explicitWaitUnit": "Seconds",
+                "implicitWait": "20",
+                "implicitWaitUnit": "Seconds",
+                "terminateScriptIfTakesMoreTime": "30",
+                "terminateScriptUnit": "Minutes",
+                "terminateSuiteIfTakesMoreTime": "12",
+                "terminateSuiteUnit": "Hours"
+              },
+              "customMachineDetails": [
+                {
+                  "clientId": "FireFlink Device Farm-SCDR2269",
+                  "machineInstances": [
+                    {
+                      "executionEnv": "FireFlink Device Farm",
+                      "browserName": "safari",
+                      "browserVersion": "17",
+                      "deviceInfo": [
+                        {
+                          "version": "8.1.0",
+                          "name": "Samsung_GalaxyM20_258bd",
+                          "type": "local",
+                          "subType": "device",
+                          "platform": "android",
+                          "appId": "qrCode_1791290995215.png",
+                          "appName": "qrCode_1791290995215.png",
+                          "available": false
+                        },
+                        {
+                          "version": "14.0.1",
+                          "name": "Apple_iPodTouch_00254",
+                          "serial_no": "",
+                          "type": "local",
+                          "subType": "device",
+                          "platform": "ios",
+                          "appId": "mesho-1787808732_Resigned1787809146455.ipa",
+                          "appName": "mesho-1787808732_Resigned1787809146455.ipa",
+                          "deviceUniqueId": "",
+                          "available": true
+                        }
+                      ],
+                      "runDetails": [
+                        {
+                          "peVariableSetId": "SUITE_VAR_SET25e6a277-9398-407f-8392-1a1ce4db73d6",
+                          "globalVariableSetId": "SUITE_VAR_SET6676b2fe-6703-46bf-a5fd-cef69e32f942",
+                          "testDataSetId": "TDS61717af7-0733-4ce8-bc9e-fd0fa611c657"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "licenseId": "LIC4043",
+              "accessToken": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJIUlpZV2NoTURZWXVQaDF3TDkxb3drS3Q1OUtuNC1sOFRJcXF3a2RBV2pjIn0.eyJleHAiOjE3OTE0NTc5OTgsImlhdCI6MTc5MTM3MTU5OCwianRpIjoib25ydG5hOmQxNGY0ZWNjLWE1YzYtNDliYy1iNWFmLTVjYzMzZjJlNjdhZSIsImlzcyI6Imh0dHA6Ly8xNDguNzIuMTY4LjE2OjMwMTA3L3JlYWxtcy9GaXJlRmxpbmstdGVzdDEiLCJzdWIiOiJmOjg4OTI5YjAwLTczYjgtNDc0Zi1iYmJjLWRiMmUxYTNlMDc5ODpzaGlyaW5lbnZpMTIzQGdtYWlsLmNvbSIsInR5cCI6IkJlYXJlciIsImF6cCI6InRhcmdldC1jbGllbnQiLCJzaWQiOiIxMmFjZjU0Mi0yNDBiLTQ4YzYtOTVmOC00ZWYyNTY5NmRkNTgiLCJhY3IiOiIxIiwiYWxsb3dlZC1vcmlnaW5zIjpbIioiXSwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbIm9mZmxpbmVfYWNjZXNzIiwidW1hX2F1dGhvcml6YXRpb24iXX0sInNjb3BlIjoicHJvZmlsZSBlbWFpbCIsImN1cnJlbnRMaWNlbnNlSWQiOiJMSUM0MDQzIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJjdXJyZW50UHJpdmlsZWdlIjoiQWRtaW4iLCJmdWxsTmFtZSI6IlNoaXJpbiIsImFjdGl2YXRpb25TdGF0dXMiOiJBQ1RJVkUiLCJwcml2aWxlZ2UiOiJBZG1pbiIsImxpY2Vuc2VOYW1lIjoiRmlyZUZsaW5rIC0gTElDNDA0MyIsInByZWZlcnJlZF91c2VybmFtZSI6IlNoaXJpbiIsInVzZXJOYW1lIjoic2hpcmluZW52aTEyM0BnbWFpbC5jb20iLCJiaWxsaW5nQ3ljbGUiOiJZZWFybHkiLCJpZCI6IlVTUjI1NjQ3IiwibGljZW5zZUlkIjoiTElDNDA0MyIsImVtYWlsIjoic2hpcmluZW52aTEyM0BnbWFpbC5jb20ifQ.btmzdRw6RKLHvfTrwDdaxuiH6c0pCMrZ6ZAouedgzmWmNVb7Glbi71Vmhh1cc8Dc7AvBN-IJ15JTSVqRbv9Et3hc5fMlke7fAgZTaGu6nABfoPCO7e0sz4l_i6nELKUVX84ExPbWBJVEu-xoksj7H10TgCAL-evawwix4tvEXAzMgsPtf24Mz6YINviw2SjgxXBkVfi2IcoPNUoEO7b2D2bb1dmsFVOu-5rnR7PyW3jWDiaBKERfne4K8YPOldrsax-oHpLMYCKXWcwt2tI1f6P9r00fWl9vKfQ8KTZNDf0ga4TSFNs60PkFIJrqUUf5lhqCIJk17TiTrdmEFlSLtg",
+              "projectId": "PJT1092",
+              "executionDataSet": {
+                "peVariableSetId": "SUITE_VAR_SET25e6a277-9398-407f-8392-1a1ce4db73d6",
+                "globalVariableSetId": "SUITE_VAR_SET6676b2fe-6703-46bf-a5fd-cef69e32f942",
+                "testDataSetId": "TDS61717af7-0733-4ce8-bc9e-fd0fa611c657"
+              }
+            }'
